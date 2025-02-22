@@ -1,6 +1,6 @@
 /**
  * ======================================================
- *     PREDEFINE HARDWARE MEMORY ADDRESSES SUCH AS:
+ *     DEFINE HARDWARE MEMORY ADDRESSES SUCH AS:
  * 
  *      - PERIPHERALS
  *      - RTC MEMORY
@@ -14,13 +14,17 @@
 #include <stdint.h>
 
 
-#define __VUINT32 volatile uint32_t
-#define __VUINT16 volatile uint16_t
 #define __VUINT8 volatile uint8_t
+#define __VUINT16 volatile uint16_t
+#define __VUINT32 volatile uint32_t
 
-#define __VUINT32_PTR volatile uint32_t*
-#define __VUINT16_PTR volatile uint16_t*
 #define __VUINT8_PTR volatile uint8_t*
+#define __VUINT16_PTR volatile uint16_t*
+#define __VUINT32_PTR volatile uint32_t*
+
+#define __VUINT8_REF volatile uint8_t&
+#define __VUINT16_REF volatile uint16_t&
+#define __VUINT32_REF volatile uint32_t&
 
 
 namespace esp32_addr {

@@ -15,6 +15,7 @@
 #include <assert.h>
 #include "__utils.h"
 #include "__define_macros.h"
+#include "__define_types.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
@@ -25,7 +26,7 @@
 #include <sys/socket.h>
 #include <arpa/inet>
 
-typedef UINT_PTR SOCKET;
+typedef unsigned int* SOCKET;
 typedef int socklen_t;
 
 #define SOCKET_ERROR -1
@@ -66,6 +67,8 @@ public:
   sys_socket(SOCKET_FAM family = -1, SOCKET_TYPE type = -1,  SOCKET_PROTO protocol = -1):
   server_family(family), server_type(type), server_protocol(protocol) {}
 
+  ~sys_socket() {}
+
   void init_data() {
     
     server_struct->sin_addr.s_addr = IS_LOCAL_ADDR? inet_addr(server_addr): INADDR_ANY;
@@ -74,7 +77,7 @@ public:
     
   }
 
-  bool isError_Socket(SOCKET net_server, SOCKET net_client) {
+  bool IS_ERROR_SOCKET(SOCKET net_server, SOCKET net_client) {
     bool IS_ERROR_BIND_OR_LISTEN = false;
 
     bool IS_ERROR_BINDING = (bind(net_server, (struct sockaddr*)&server_struct, addrlen) == SOCKET_ERROR);
@@ -95,11 +98,11 @@ public:
    * 
   */
   char* __STATUS_ROUTE(const char* routes[], char* path){
-    int index = 0;
+    int index;
     char* response;
     int num_routes = sizeof(routes) / sizeof(routes[0]);
 
-    for (index; index < num_routes; index ++) {
+    for (index = 0; index < num_routes; index ++) {
       bool IS_EXISTENT_ROUTE = strcmp(path, routes[index]) == 0;
       response = IS_EXISTENT_ROUTE? strcat(__USES_HTTP, HTTP_CODES[0])
                                   : strcat(__USES_HTTP, HTTP_CODES[2]);
@@ -107,19 +110,30 @@ public:
     return response;
   }
 
-  void handle_client(SOCKET client_fd, int recv_client_bytes) {
+  void handle_client(SOCKET client_fd, int recv_client_bytes, char* response) {
     int flag = 0;
     char method[10], *path, protocol[10];
-
-    // TODO: CHANGE TO AN ACTUAL VALUES
-    char response[BUFFER_SIZE];
     char* line = strtok(response, "\r\n");
+    size_t count = ((_countof(method) * 2) + _countof(protocol));
+    int matched = sscanf_s(line, "%9s %s %9s", method, path, protocol, (unsigned)count);
 
-    char* http_message = __STATUS_ROUTE(READY_SERVER->HTTP_ROUTES, "/HelloWorld");
-    int matched = sscanf(line, "%s %s %s", method, path, protocol); 
+    char* http_message = __STATUS_ROUTE(READY_SERVER->HTTP_ROUTES, path);
 
     snprintf(response, sizeof(response), http_message, path);
     send(client_fd, response, strlen(response), flag);
+
+  }
+
+  void create_server() {
+    this->init_data();
+    server_fd = socket(server_struct->sin_family, this->server_type, this->server_protocol);
+    client_fd = accept(server_fd, (struct sockaddr*)&server_addr, &addrlen);
+
+    if (this->IS_ERROR_SOCKET(server_fd, client_fd)) perror("Cannot handle server connection due to an error: ");
+
+    char buffer[BUFFER_SIZE];
+    recv_bytes = recv(client_fd, buffer, BUFFER_SIZE, 0);
+    this->handle_client(client_fd, recv_bytes, buffer);
 
   }
 

@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            // Change both ``name`` & ``intelliSenseMode`` if in Linux
+            // Additionally: Change directory folders' path
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Python312/include",
+                "C:/Libraries/libusb/include",
+                "waffle_lib/web_socket"
+            ],
+            "compilerPath": "C:/msys64/mingw64/bin/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x86"
+        }
+    ],
+    "version": 4
+}

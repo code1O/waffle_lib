@@ -1,0 +1,32 @@
+
+start_func set_net_info:
+  
+  num .net_protocol -> TCP -- automatically detects as 6 --
+  num .net_hostport -> 8080
+  num .server_addr -> INADDR_ANY
+
+  mov .protocol, #.net_protocol
+  mov .hostport, #.net_hostport
+  mov .addr, #.server_addr
+
+end_func
+
+start_func set_html_info:
+  
+  $ .http_title -> "SodaHTTP"
+  ? .page_routes -> "/", "/HelloWorld", "/login"
+  <?> .set_darktheme -> depends{.page_routes, 1, "/"}
+
+  call set_values
+  mov .global_title, #.http_title
+  mov .routes, #.page_routes
+  mov .darktheme #.set_darktheme
+
+end_func
+
+start_func __start_config:
+
+  call set_net_info
+  call set_html_info
+
+end_func

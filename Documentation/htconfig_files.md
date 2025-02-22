@@ -93,7 +93,7 @@ start_func __start_config:
   -- Hello World! this is a comment --
 
   $ .my_title -> "MyTitle"
-  ? .my_routes -> "/", "/HelloWorld", "/Other"
+  ? .my_routes -> ["/", "/HelloWorld", "/Other"]
   <?> .my_darktheme -> depends{.my_routes, 2, "/HelloWorld", "/Other"}
 
   mov .global_title, #.my_title
@@ -125,7 +125,7 @@ end_func
 start_func set_html_info:
   
   $ .http_title -> "SodaHTTP"
-  ? .page_routes -> "/", "/HelloWorld", "/login"
+  ? .page_routes -> ["/", "/HelloWorld", "/login"]
   <?> .set_darktheme -> depends{.page_routes, 1, "/"}
 
   call set_values

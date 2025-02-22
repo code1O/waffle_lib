@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\waffle_lib",
+    "\\waffle_lib\\drivers",
+    "\\waffle_lib\\drivers\\embedded_systems",
+    "\\waffle_lib\\spacey",
+    "\\waffle_lib\\web_socket",
+    "\\waffle_lib\\web_socket\\htconfig"
+  ],
+  "SelectedNode": "\\waffle_lib\\web_socket\\htconfig\\__process_htconfig.h",
+  "PreviewInSolutionExplorer": false
+}
