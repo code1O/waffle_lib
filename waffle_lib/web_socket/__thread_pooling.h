@@ -10,6 +10,8 @@
 
 #endif
 
+// WHAT'S THIS SUPPOSED TO BE? I DON'T REMEMBER
+
 struct tpool;
 typedef struct tpool tpool_t;
 typedef void (*thread_func_t)(void *arg);

@@ -31,7 +31,7 @@ const char* tags[] = {
 
 char BUFFER_LANG[2];
 std::string LOCALE_LANG = std::locale().name();
-#define USER_LOCALE snprintf(BUFFER_LANG, 3, "%s", LOCALE_LANG);
+#define USER_LOCALE snprintf(BUFFER_LANG, 3, "%s", LOCALE_LANG); 
 
 void INIT_HTML(const char* TitleTag_Content, const char* filename = config_file) {
 
