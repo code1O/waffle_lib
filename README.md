@@ -1,7 +1,11 @@
-<meta property="og:image" content="https://raw.githubusercontent.com/code1O/waffle_lib/master/Assets/github_cover.png">
-<meta property="og:title" content="Waffle_lib">
-<meta property="og:description" content="Multi-purpose tools library">
-
+<head>
+    <meta property="og:image" content="https://raw.githubusercontent.com/code1O/waffle_lib/master/Assets/github_cover.png">
+    <meta property="og:title" content="Waffle_lib">
+    <meta property="og:url" content="https://github.com/code1O/waffle_lib">
+    <meta property="og:description" content="Multi-purpose tools library">
+    <meta property="twitter:card" content="cover_image">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/code1O/waffle_lib/master/Assets/github_cover.png">
+</head>
 
 # Waffle_lib :waffle:
 
