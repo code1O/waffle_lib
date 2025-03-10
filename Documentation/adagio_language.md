@@ -8,7 +8,7 @@ based in ``ARM32`` / ``ARM64``,
 
 <summary><h1>Data types</h1></summary>
 
-Likewise other languages, in the `.htconfig` exists different types of data,
+Likewise other languages, in `adagio` exists different types of data,
 and you can differentiate it based on the characters
 
 - **Arrays**
